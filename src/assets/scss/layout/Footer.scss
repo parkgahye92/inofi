@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+/*-------------------------------------------------
+title : Footer style sheet
+Author : Gahye Park
+Create date :2021. 12. 06
+-------------------------------------------------*/
+
+/* 레이아웃 헤더 영역 */
+#footer{position:relative; width:100%;
+    .f-contaier{position:relative; width:1500px; margin:auto;
+        .community{position:relative; padding:1.25rem 0; 
+            &:before{position:absolute; top:0; left:50%; @include transform(translateX(-50%)); width:100vw; height:100%; background:#9599a7; content:""; }
+            &:after{@extend %clear; }
+            > strong{position:relative; float:left; margin-top:.85rem; color:#fff; font-size:1.1rem; font-family:$ff3; font-weight:600; z-index:1; }
+            .community-lst{position:relative; overflow:hidden; float:right; margin:-.25rem -.85rem; z-index:1;
+                > li{display:inline-block; padding:.25rem .85rem; vertical-align:middle;
+                    > a{display:block; color:#fff; font-size:2rem; @include transition(transform .3s); 
+                        > img{display:block; width:2rem; }
+                    }
+                }
+            }
+        }
+        .f-lst-wrap{position:relative; padding:1.5rem 0; 
+            &:before{position:absolute; top:0; left:50%; @include transform(translateX(-50%)); width:100vw; height:100%; background:#000; content:""; }
+            &:after{@extend %clear; }
+            .f-lst{position:relative; overflow:hidden; float:left; margin:-.5rem -.75rem; z-index:1;
+                > li{float:left; padding:.5rem .75rem;
+                    > a{position:relative; display:block; color:#fff; font-size:.85rem; font-family:$ff3; 
+                        &:before{position:absolute; bottom:0; left:0; width:0; height:1px; background:#fff; @include transition(width .3s); content:""; }
+                    }
+                }
+            }
+            .copy{position:relative; float:right; font-size:.8rem; font-family:$ff3; color:#858585; z-index:1; }
+        } 
+    }
+}
+
+
+/* responsive */
+@include desktop {
+    #footer .f-contaier{
+        .f-lst-wrap .f-lst > li > a:hover:before{width:100%; }
+        .community .community-lst > li > a:hover{@include transform(rotateY(180deg)); }
+    }
+}
+@media screen and (max-width:1550px){
+    #footer{
+        .f-contaier{width:95%; }
+    }
+    
+}
+@media screen and (max-width:1200px){
+    #footer{
+        .f-contaier{width:95%; 
+            .community{
+                > strong{margin-top:.75rem; font-size:1rem; }
+                .community-lst > li > a{font-size:1.8rem; 
+                    > img{width:1.9rem; }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width:1024px){
+    #footer .f-contaier{
+        .f-lst-wrap{
+            .f-lst > li > a,
+            .copy{font-size:.75rem; }
+        }
+    }
+}
+
+@media screen and (max-width:768px){
+    #footer{text-align:center;
+        .f-contaier{
+            .f-lst-wrap{
+                .f-lst{float:none; 
+                    > li{float:none; display:inline-block; }
+                }
+                .copy{float:none; margin-top:1rem; }
+            }
+            
+            .community{text-align:center; 
+                > strong{float:none; display:block; font-size:1.1rem; }
+                .community-lst{float:none; width:100%; margin:1rem auto 0; }
+            }
+        }  
+    }
+}

@@ -1,0 +1,98 @@
+@charset "utf-8";
+
+/*-------------------------------------------------
+title : Heart style sheet
+Author : Gahye Park
+Create date :2021. 12. 06
+-------------------------------------------------*/
+.heart{position:absolute; top:50%; left:50%; width: 1.5rem; fill:#d8d8d8; @include transform(translate(-50%, -50%)); @include transition((fill .5s, transform .5s)); pointer-events:none;
+        
+    &-btn{position:relative; width:3.5rem; height:3.5rem; background:transparent; border-radius:50%; background:#fff; box-shadow:0 3px 6px 0 rgba(0, 0, 0, 0.16); border:0;
+        &.liked{
+            .heart{
+                fill: #e56464;
+                
+                &-icon{
+                 @include transform((translate(-50%, -50%), scale(1.2)));
+                }
+                &-pop{
+                animation-direction: normal;
+                }
+            }
+        }
+    }
+    
+    &-pop{
+        position: absolute; 
+        width: 30%;
+        opacity: 0;
+        left: 0;
+        animation: pop 1s ease forwards reverse;
+        
+        &.one{
+        left: 1%;
+        transform: rotate(-10deg);
+        animation-delay: .45;
+        }
+        &.two{
+        left: 15%;
+        transform: rotate(8deg);
+        animation-delay: .25s;
+        }
+        &.three{
+        left: 30%;
+        transform: rotate(-5deg);
+        animation-delay: 0;
+        }
+        &.four{
+        left: 50%;
+        transform: rotate(-8deg);
+        animation-delay: .3s;
+        }
+        &.five{
+        left: 60%;
+        transform: rotate(-10deg);
+        animation-delay: .9s;
+        }
+        &.six{
+        left: 70%;
+        transform: rotate(-8deg);
+        animation-delay: .2;
+        }
+        &.seven{
+        left: 85%;
+        transform: rotate(6deg);
+        animation-delay: .35s;
+        }
+        &.eight{
+        left: 90%;
+        transform: rotate(-4deg);
+        animation-delay: .5s;
+        }
+        &.nine{
+        left: 95%;
+        transform: rotate(8deg);
+        animation-delay: .2s;
+        }
+    }
+    }
+    
+    @keyframes pop{
+    0%{
+        left: calc(50% - 7px);
+        top: 10px;
+    }
+    20%{
+        opacity: 1;
+    }
+    80%{
+        top: -20px;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width:1024px){
+    .heart-btn{width:3rem; height:3rem; }
+}

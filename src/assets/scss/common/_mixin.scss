@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+/*-------------------------------------------------
+title : _mixin style sheet 
+Author : Gahye Park
+Create date :2021. 12. 06
+-------------------------------------------------*/
+
+@import "~@/assets/scss/common/variables.scss";
+
+// fonts
+@import url("~@/assets/font/NotoSansKR/fonts.css"),
+        url("~@/assets/font/Montserrat/fonts.css"),
+        url("~@/assets/font/Sora/fonts.css"),
+        url("~@/assets/font/XEIcon-2.3.3/xeicon.min.css");
+        
+$ff1:'xeicon';    //xeicon
+$ff2:'SCDream';   //SCDream
+$ff3:'Sora';   //Sora
+$ff4:'NotoSans';   //NotoSans
+
+@mixin transform($property){
+    transform :$property;
+    -webkit-transform :$property;
+    -ms-transform :$property;
+    -moz-transform :$property;
+}
+@mixin transition($transition){  
+    transition :$transition;
+    -webkit-transition :$transition;
+    -moz-transition:$transition;
+    -ms-transition:$transition;
+}
+@mixin transition-timing-function($transition-timing-function){  
+    transition-timing-function :$transition-timing-function;
+    -webkit-transition-timing-function :$transition-timing-function;
+    -moz-transition-timing-function:$transition-timing-function;
+    -ms-transition-timing-function:$transition-timing-function;
+}
+@mixin transition-delay($transition-delay){  
+    transition-delay :$transition-delay;
+    -webkit-transition-delay :$transition-delay;
+    -moz-transition-delay:$transition-delay;
+    -ms-transition-delay:$transition-delay;
+}
+@mixin animation ($delay, $duration, $timing, $name) {
+    animation-delay:$delay;
+    animation-duration:$duration;
+    animation-name:$name;
+    animation-timing-function:$timing;
+    animation-iteration-count:infinite;
+}
+%textOverflow{display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+%textOverflow2{overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:3;  -webkit-box-orient: vertical; }
+%textOverflow3{overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:3;  -webkit-box-orient: vertical; }
+%softAct{transition:all .3s; -webkit-transition:all .3s; -ms-transition:all .3s; }
+%clear{display:block; clear:both; content:""; }
+%aniActiveUn1{opacity:0; visibility:hidden; @include transform(matrix(0.1, -0.01, 0, 1, -100, 100)); @include transition((visibility .5s, transform .5s, opacity .5s)); @include transition-timing-function(ease-in-out); }
+%aniActive1{opacity:1; visibility:visible; @include transform(matrix(1, 0, 0, 1, 0, 0)); }
+%aniActiveUn2{opacity:0; visibility:hidden; @include transform(matrix(1.5, 0, 0, 1, 0, 0)); @include transition((visibility .5s, transform .5s, opacity .5s)); @include transition-timing-function(ease-in-out); }
+%aniActive2{opacity:1; visibility:visible; @include transform(matrix(1, 0, 0, 1, 0, 0)); }
+
+
+/* responsive */
+@mixin mobile {
+    @media (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet - 1px}) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+        @content;
+    }
+}
+@mixin desktop { 
+    @media (min-width: #{$breakpoint-desktop}) {
+        @content;
+    }
+}
+

@@ -1,0 +1,95 @@
+@charset "utf-8";
+
+/*-------------------------------------------------
+title : sub layout style sheet
+Author : Gahye Park
+Create date : 2021. 12. 06
+-------------------------------------------------*/
+
+.sub-layout{position:relative; padding-bottom:4.5rem; 
+    .sub-visual{position:relative; height:16rem; background-image:linear-gradient(97deg, #19ce60 29%, #0ead97 65%); overflow:hidden;
+        .pageTitle{position:absolute; top:calc(50% + 2.5rem); left:50%; max-width:95%; text-align:center; @include transform(translate(-50%, -50%)); letter-spacing:.13rem; font-size:2.3rem; font-family:$ff3; font-weight:700; color:#fff; text-transform:uppercase; }
+        .bg-txt{position:absolute; top:50%; left:50%; width:1500px; height:100%; @include transform(translate(-50%, -50%));
+            > em{position:absolute; font-size:45rem; font-weight:900; opacity:0.6; -webkit-text-stroke:1px #fff; color:transparent; line-height:1; @include transform(translate(0,0)); } 
+            .img-txt1{bottom:-20rem; left:-21rem; @include animation(0s, 6s, ease-in-out, float); } 
+            .img-txt2{top:-21rem; left:40%;  @include animation(.5s, 5s, ease-in-out, float); }
+            .img-txt3{bottom:-33rem;right:-14rem; @include animation(.8s, 8s, ease-in-out, float); }
+        }
+    }
+    .sub-menu{position:absolute; bottom:0; left:50%; width:100%; height:4.5rem; @include transform(translateX(-50%)); background:#fff; text-align:center; box-shadow:0 3px 6px 0 rgba(0,0,0,.16);
+        > ul{display:inline-block; overflow:hidden; max-width:1500px;
+            > li{float:left; height:100%; 
+                &.none{display:none; }
+                > a{position:relative; display:block; padding:0 2rem; font-family:$ff3; color:#000; line-height:4.5rem; font-size:1.1rem; font-weight:600; text-transform:uppercase; 
+                    > span{position:relative; display:inline-block; height:100%;
+                        &:before{position:absolute; bottom:0; left:50%; width:0; height:.35rem; background:#02bba2; @include transform(translateX(-50%)); @include transition(width .3s); content:""; }
+                    }
+                    &.router-link-exact-active > span:before{width:100%; }  
+                }
+            }
+        }
+    }
+}
+
+/* top-btn */
+.top_btn{position:fixed; display:inline-block; right:0; bottom:5rem; width:4rem; height:4rem; border-radius:50%; -webkit-transform:translateX(-50%); transform:translateX(-50%); background-image:linear-gradient(134deg, #00b29a 17%, #19ce60 85%); color:#fff; text-align:center; font-size:1.5rem; z-index:98;
+    > i{position:absolute; top:50%; left:50%; @include transform(translate(-50%, -50%)); @include transition(top .3s); }
+}
+
+
+/* responsive */
+@media screen and (max-width:1550px){
+    .sub-layout{
+        .sub-visual{height:15rem;
+            .bg-txt{width:100%; 
+                > em{font-size:20rem; }
+                .img-txt1{bottom:-10rem; left:-1rem; }
+                .img-txt2{top:-9rem; }
+                .img-txt3{bottom:-14rem; right:-1rem; }
+            }
+            .pageTitle{font-size:2rem; }
+        }
+
+        .sub-menu{
+            > ul > li > a{font-size:1rem; }
+        }
+    }
+}
+@include desktop {
+    .sub-layout .sub-menu > ul > li > a:not(.router-link-exact-active):hover > span:before{width:100%; }
+    .top_btn:hover > i{top:calc(50% - .25rem); }
+}
+@media screen and (max-width:1024px){
+    .sub-layout{padding-bottom:3.25rem;
+        .sub-visual{height:13rem;
+            .bg-txt{
+                > em{font-size:15rem; }
+                .img-txt1{bottom:-5rem; }
+                .img-txt2{top:-8rem; }
+                .img-txt3{bottom:-10rem; }
+            }
+            .pageTitle{font-size:1.7rem; }
+        }
+
+        .sub-menu{height:3.25rem;
+            > ul > li > a{padding:0 1.25rem; font-size:1rem; line-height:3.25rem; }
+        }
+    }
+}
+@media screen and (max-width:768px){
+    .sub-layout{padding-bottom:0;
+        .sub-menu{display:none; }
+    }
+}
+@media screen and (max-width:480px){
+    .sub-layout{
+        .sub-visual{height:12rem;
+            .bg-txt{
+                > em{font-size:10rem; }
+                .img-txt1{bottom:-3rem; }
+                .img-txt2{top:-5rem; }
+                .img-txt3{bottom:-5rem; }
+            }
+        }
+    }
+}

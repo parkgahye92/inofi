@@ -1,0 +1,217 @@
+@charset "utf-8";
+
+/*-------------------------------------------------
+title : Header style sheet 
+Author : Gahye Park
+Create date :2021. 12. 06
+-------------------------------------------------*/
+
+/* transition 화면 전환 효과 */
+.slide-fade-enter-active,
+.slide-fade-leave-active {@include transition(all .5s ease);}
+.slide-fade-enter-from,
+.slide-fade-leave-to {@include transform(translateX(-10px)); opacity:0; }
+
+/* 레이아웃 헤더 영역 */
+html{position:relative;
+    &:before{position:fixed; top:50%; left:50%; @include transform(translate(-50%, -50%)); width:100vw; height:100%; background:rgba(0,0,0,.42); content:""; @include transition(opacity .3s); opacity:0; visibility:hidden; z-index:99; }
+    &.header-layer-active{overflow:hidden; 
+        &:before{opacity:1; visibility:visible; }
+    }
+}
+#header{position:absolute; width:100%; height:5rem; border-bottom:1px solid rgba(255,255,255,.5); z-index:98;
+    .header-contaier{position:relative; width:1880px; height:100%; margin:auto;
+        .logo{position:absolute; top:50%; left:1.5rem; @include transform(translate(-50%, -50%));
+            a{display:block; width:6.5rem; 
+                svg{display:block; width:100%; height:100%; }
+            }
+        }
+        .t-util{position:absolute; top:50%; left:50%; @include transform(translate(-50%, -50%)); 
+            > ul{
+                &:after{display:block; clear:both; content:""; }
+                > li{float:left;  
+                    + li{margin-left:2.5rem; }
+                    > a,
+                    > div{display:block; font-size:1rem; color:#fff; @include transition(letter-spacing .3s); cursor:pointer; }
+                }
+            }
+        }
+        .t-side{margin-top:2rem; float:right; 
+            > ul{
+                > li{position:relative; display:inline-block; vertical-align:middle;
+                    + li{margin-left:.75rem; }
+                    > button{display:block; color:#fff; font-size:.75em;
+                        > i{font-size:1.25rem;}
+                        &.lang-btn{position:relative; padding-left:1.5rem; 
+                            &:before{position:absolute; top:50%; left:0; @include transform(translateY(-50%)); font-family:$ff1; font-size:1.25rem; content:"\e9d1"; }
+                        }
+                    }
+                    .search-wrap{position:absolute; display:none; top:50%; right:2rem; width:17.5rem; height:2.25rem; @include transform(translateY(-50%)); border-radius:1.25rem; border:1px solid #fff; overflow:hidden; 
+                        input{display:block; width:100%; height:100%; padding:0 .5rem; color:#fff; outline:0; }
+                        button{position:absolute; top:50%; right:1rem; @include transform(translateY(-50%)); font-size:1.25rem; color:#fff; }
+                    }
+                    .lang-wrap{position:absolute; display:none; top:1.5rem; left:50%; width:4rem; padding:.25rem .75rem; @include transform(translateX(-50%)); border-width:1px; border-color:#fff; border-style:solid; border-radius:1rem; 
+                        li{
+                            & + li{border-top:1px solid #fff; }
+                            > a{display:block; padding:.25rem 0; color:#fff; font-size:.65rem; text-align:left; 
+                                > span{@include transition(box-shadow .3s); }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.pull-menu-wrap{position:fixed; top:0; right:0; width:21.5rem; height:100vh; padding:7.5rem 3rem 2rem 5.5rem; background-color:rgba(0,0,0,.65); @extend %aniActiveUn2; 
+    #gnb{
+        li{opacity:0; @include transform (translate(0%, 110%) matrix(1, -.2, 0, 1, 0, 0)); 
+            & + li{margin-top:2rem; }
+            > a{display:block; color:#fff; font-weight:700; font-family:$ff3; font-size:1.3rem; text-transform:uppercase; @include transition(letter-spacing .3s); }
+        }
+    }
+    .pull-menu-close-btn{position:absolute; top:2em; right:2.5rem; font-size:1.5rem; color:#fff; 
+        > i{@include transition(transform .3s); }
+    }
+    .t-util-wrap{display:none; margin-top:3rem; opacity:0; @include transform (translate(0%, 110%) matrix(1, -.2, 0, 1, 0, 0));
+        .t-util{overflow:hidden;
+            > ul{display:table; width:100%; margin:-.25rem; 
+                > li{display:table-cell; vertical-align:middle; padding:.25rem;
+                    > a,
+                    > div{position:relative; display:block; color:#fff; text-align:center; cursor:pointer; @include transition(letter-spacing .3s); 
+                        &:before{position:absolute; top:50%; left:-.25rem; width:1px; height:.5rem; @include transform(translateY(-50%)); background:#fff; content:""; }
+                    }
+                }
+            }
+        } 
+    }
+    &.active{@extend %aniActive2; 
+        #gnb li{opacity:1; @include transform(matrix(1, 0, 0, 1, 0, 0)); @include transition((transform .8s, opacity .8s)); @include transition-timing-function(ease-in-out); 
+            @for $i from 1 through 6 {
+                &:nth-of-type(6n + #{$i}){
+                    @include transition-delay(.4s + $i * .1s);
+                }
+            }
+        }
+        .t-util-wrap{opacity:1; @include transform(matrix(1, 0, 0, 1, 0, 0)); @include transition((transform .8s, opacity .8s)); @include transition-timing-function(ease-in-out); @include transition-delay(1s);
+        }
+    }
+}
+.h-layer{position:fixed; display:none; top:5rem; left:50%; min-width:30rem; max-width:95%; padding:1rem; @include transform(translateX(-50%)); z-index:999; background:rgba(255, 255, 255, 0.5);
+    > div{border-radius:1rem; overflow:hidden;
+        h3{position:relative; display:block; padding:2rem 6rem 2rem 1.5rem; text-transform:capitalize; font-size:1.4rem; font-family:$ff3; font-weight:700; background-image:linear-gradient(98deg, #19ce60 14%, #00b29a 94%); line-height:1; color:#fff; 
+            .h-layer-close-btn{position:absolute; top:50%; right:2rem; @include transform(translateY(-50%)); font-size:1.7rem;
+                > i{@include transition(transform .3s); }
+            }
+        }
+        .h-layer-cont{padding:2.5rem 3.5rem; background:#fff; 
+            ul{
+                > li{ 
+                    & + li{margin-top:1.5rem; }
+                    > a{position:relative; display:block; padding-left:3rem; font-family:$ff3; font-size:1.5rem; font-weight:700; text-transform:uppercase; @include transition(color .3s);
+                        &:before{position:absolute; top:50%; left:0; width:2rem; height:2rem; @include transform(translateY(-50%)); background-image:url(~@/assets/img/layout/ethereum_eth_logo.png); background-repeat:no-repeat; background-size:cover; background-position:center; content:""; }
+                    }
+                    &.bsc > a:before{background-image:url(~@/assets/img/layout/binance_coin_bnb_logo.png); }
+                    &.klaytn > a:before{background-image:url(~@/assets/img/layout/klaytn_klay_logo.png); }
+                    &.polygon > a:before{background-image:url(~@/assets/img/layout/polygon_matic_logo.png); }
+                }
+            } 
+        }
+    } 
+    
+    &.disconnect-wrap{
+        > div{
+            .h-layer-cont{text-align:center;
+                button{position:relative; display:inline-block; width:17.5rem; height:3rem; border-width:1px; border-color:#7a7a7a; border-style:solid; background:#7a7a7a; border-radius:.25rem; overflow:hidden; 
+                    &:before{position:absolute; top:100%; left:0; width:100%; height:100%; background:#484848; @include transition(top .3s); content:""; }
+                    > span{position:absolute; top:50%; left:50%; @include transform(translate(-50%, -50%)); width:100%; padding:0 .5rem; font-size:.85rem; font-weight:600; color:#fff; }
+                }
+            } 
+        }
+    }
+} 
+
+/* responsive */
+@media screen and (max-width:1920px){
+    #header{
+        .header-contaier{width:95%; 
+            .logo{left:0; @include transform(translateY(-50%)); }
+        }
+    }
+    
+}
+@include desktop {
+    #header {
+        .header-contaier{
+            .t-util > ul > li > a:hover,
+            .t-util > ul > li > div:hover{letter-spacing:.1rem; } 
+            .t-side > ul > li .lang-wrap li > a:hover > span{box-shadow:0 -5px rgb(30,130,255,.5) inset; }
+        }
+    }
+
+    
+    .pull-menu-close-btn:hover > i{@include transform(rotate(180deg)); }
+    .pull-menu-wrap #gnb li > a:hover{letter-spacing:.3rem; } 
+    .h-layer{
+        h3 .h-layer-close-btn:hover > i{@include transform(rotate(180deg)); }
+        &.disconnect-wrap .h-layer-cont button:hover:before{top:0; }
+        .h-layer-cont .h-layer-cont > ul > li > a:hover{color:#00b29a; }
+    } 
+    .pull-menu-wrap .t-util-wrap .t-util > ul > li > a:hover, 
+    .pull-menu-wrap .t-util-wrap .t-util > ul > li > div:hover{letter-spacing:.05rem; } 
+}
+@media screen and (max-width:1750px){
+    #header{
+        .header-contaier{
+            > .t-util{display:none; }
+         }
+    }
+    .pull-menu-wrap{width:29.5rem;
+        .t-util-wrap{display:block; }
+    } 
+}
+@media screen and (max-width:1024px){
+    #header{
+        .header-contaier{
+            .t-side > ul > li.search{position:static; 
+                .search-wrap{top:calc(100% + 1rem); right:auto; left:50%; width:100%; @include transform(translateX(-50%)); 
+                }
+            }
+         }
+    }
+}
+@media screen and (max-width:768px){
+    #header{height:3.5rem;
+        .header-contaier{
+            > .t-side{margin-top:1rem;}
+        }
+    }
+    .pull-menu-wrap{width:100%; padding:4.5rem .5rem 1rem;
+        #gnb li > a{text-align:center; font-size:1.2rem; }
+        .pull-menu-close-btn{top:1rem; right:2.5%; }
+    }
+
+    .h-layer{width:95%; min-width:inherit;
+        > div{
+            h3{font-size:1.3rem; padding:1.5rem 5rem 1.5rem 1.5rem; text-align:left; }
+            .h-layer-cont{padding:2rem 1.5rem; 
+                ul > li > a{padding-left:2.5rem; font-size:1.4rem; 
+                    &:before{width:1.85rem; height:1.85rem; }
+                }
+            }
+        }
+        
+        &.disconnect-wrap > div .h-layer-cont button{width:100%; }
+    }
+}
+@media screen and (max-width:480px){
+
+    .h-layer{
+        > div{
+            h3{font-size:1.2rem; }
+            .h-layer-cont ul > li > a{font-size:1.2rem; }
+        }
+    }
+}
